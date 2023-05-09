@@ -1,0 +1,44 @@
+To view data from a database in Android Studio, you can use the following steps:
+
+Open your Android Studio project.
+In the project view, right-click on the "app" folder and select "New > Android Resource File".
+In the "New Resource File" dialog, select "Database" and click "Next".
+In the "Create Database" dialog, enter a name for your database and click "Finish".
+The database will be created in the "/assets" folder of your project.
+To open the database, you can use the following code:
+
+SQLiteDatabase db = SQLiteDatabase.openDatabase("database_name.db", null, SQLiteDatabase.OPEN_READWRITE);
+
+The db variable is a reference to the SQLiteDatabase object that you are using to connect to the database.
+
+To create a table in the database, you can use the following code:
+
+Code snippet
+String sql = "CREATE TABLE table_name (column1 TEXT, column2 TEXT, column3 TEXT);";
+db.execSQL(sql);
+Use code with caution. Learn more
+The sql variable is a string that contains the SQL statement that you want to execute.
+
+To insert data into the table, you can use the following code:
+
+db.execSQL("INSERT INTO table_name (column1, column2, column3) VALUES ('value1', 'value2', 'value3');");
+
+To view data from the table, you can use the following code:
+
+Code snippet
+Cursor cursor = db.rawQuery("SELECT * FROM table_name;", null);
+
+while (cursor.moveToNext()) {
+  // Get the column values
+  String column1 = cursor.getString(0);
+  String column2 = cursor.getString(1);
+  String column3 = cursor.getString(2);
+
+  // Do something with the column values
+}
+
+cursor.close();
+Use code with caution. Learn more
+This code will iterate through the rows in the table and print the column values to the console.
+
+I hope this helps! Let me know if you have any other questions.

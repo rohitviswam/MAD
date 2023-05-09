@@ -1,0 +1,233 @@
+MainActivity.java====================================================================
+package com.example.labexam;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    Button order;
+    CheckBox MFR,CFR,EFR,beef,burger,pizza,biriyani;
+    TextView tv;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.courses:
+                // Launch the CoursesActivity
+                Intent coursesIntent = new Intent(this, CoursesActivity.class);
+                startActivity(coursesIntent);
+                return true;
+            case R.id.admission:
+                // Launch the AdmissionActivity
+                Intent admissionIntent = new Intent(this, AdmissionActivity.class);
+                startActivity(admissionIntent);
+                return true;
+            case R.id.faculty:
+                // Launch the FacultyActivity
+                Intent facultyIntent = new Intent(this, FacultyActivity.class);
+                startActivity(facultyIntent);
+                return true;
+            case R.id.home:
+                // Launch the HomeActivity
+                Intent homeIntent = new Intent(this, HomeActivity.class);
+                startActivity(homeIntent);
+                return true;
+            case R.id.about:
+                // Launch the AboutActivity
+                Intent aboutIntent = new Intent(this, AboutActivity.class);
+                startActivity(aboutIntent);
+                return true;
+            case R.id.contact:
+                // Launch the ContactActivity
+                Intent contactIntent = new Intent(this, ContactActivity.class);
+                startActivity(contactIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+}
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        // Set up the option menu
+        invalidateOptionsMenu();
+        MFR = (CheckBox) findViewById(R.id.MFR);
+        EFR = (CheckBox) findViewById(R.id.EFR);
+        CFR = (CheckBox) findViewById(R.id.CFR);
+        beef = (CheckBox) findViewById(R.id.beef);
+        burger = (CheckBox) findViewById(R.id.burger);
+        pizza = (CheckBox) findViewById(R.id.pizza);
+        biriyani = (CheckBox) findViewById(R.id.biriyani);
+        order =  findViewById(R.id.order);
+        tv = findViewById(R.id.tv);
+        final String[] s = new String[1];
+
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tot = 0;
+                StringBuilder result = new StringBuilder();
+                result.append("Selected Items:");
+                if(pizza.isChecked()){
+                    result.append("\nPizza 150Rs");
+                    tot+=150;
+                }
+                if(biriyani.isChecked()){
+                    result.append("\nBiriyani 150Rs");
+                    tot+=150;
+                }
+                if(burger.isChecked()){
+                    result.append("\nBurger 100Rs");
+                    tot+=100;
+                }
+                if(beef.isChecked()){
+                    result.append("\nBeef 100Rs");
+                    tot+=100;
+                }
+                if(CFR.isChecked()){
+                    result.append("\nChicken Fried Rice 120Rs");
+                    tot+=120;
+                }
+                if(EFR.isChecked()){
+                    result.append("\nEgg Fried Rice 100 Rs");
+                    tot+=100;
+                }
+                if(MFR.isChecked()){
+                    result.append("\nMixed Fried Rice 120 Rs");
+                    tot+=120;
+                }
+                result.append("\nTotal:"+tot+"Rs");
+                Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_LONG).show();
+                s[0] = result.toString();
+                tv.setText(s[0]);
+            }
+        });
+    }
+}
+
+activity_main.xml===============================================================
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <CheckBox
+        android:id="@+id/burger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="172dp"
+        android:layout_marginEnd="165dp"
+        android:text="Burger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pizza" />
+
+    <CheckBox
+        android:id="@+id/biriyani"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Biriyani"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/burger" />
+
+    <CheckBox
+        android:id="@+id/CFR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chicken Fried Rice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/biriyani" />
+
+    <CheckBox
+        android:id="@+id/EFR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Egg Fried Rice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CFR" />
+
+    <CheckBox
+        android:id="@+id/MFR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mixed Fried Rice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EFR" />
+
+    <CheckBox
+        android:id="@+id/beef"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Beef"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MFR" />
+
+    <CheckBox
+        android:id="@+id/pizza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:text="Pizza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="163dp"
+        android:text="order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beef" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="195dp"
+        android:layout_height="157dp"
+        android:text="cost :0"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.726"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order"
+        app:layout_constraintVertical_bias="0.583" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

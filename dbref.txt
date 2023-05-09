@@ -1,0 +1,77 @@
+Sure. Here are the steps on how to create a database in Android Studio, then add, view, delete and update the values in the database:
+
+Open your Android Studio project.
+In the project view, right-click on the "app" folder and select "New > Android Resource File".
+In the "New Resource File" dialog, select "Database" and click "Next".
+In the "Create Database" dialog, enter a name for your database and click "Finish".
+The database will be created in the "/assets" folder of your project.
+To open the database, you can use the following code:
+
+SQLiteDatabase db = SQLiteDatabase.openDatabase("database_name.db", null, SQLiteDatabase.OPEN_READWRITE);
+
+The db variable is a reference to the SQLiteDatabase object that you are using to connect to the database.
+
+To create a table in the database, you can use the following code:
+
+Code snippet
+String sql = "CREATE TABLE table_name (column1 TEXT, column2 TEXT, column3 TEXT);";
+db.execSQL(sql);
+ 
+The sql variable is a string that contains the SQL statement that you want to execute.
+
+To insert data into the table, you can use the following code:
+
+db.execSQL("INSERT INTO table_name (column1, column2, column3) VALUES ('value1', 'value2', 'value3');");
+
+To update data in the table, you can use the following code:
+
+db.execSQL("UPDATE table_name SET column1 = 'new_value1', column2 = 'new_value2' WHERE column3 = 'value3';");
+
+To delete data from the table, you can use the following code:
+
+Code snippet
+db.execSQL("DELETE FROM table_name WHERE column3 = 'value3';");
+ 
+To close the database connection, you can use the following code:
+
+Code snippet
+db.close();
+ 
+Here is an example of how to create a database in Android Studio and insert data into it:
+
+// Create the database
+SQLiteDatabase db = SQLiteDatabase.openDatabase("database_name.db", null, SQLiteDatabase.OPEN_READWRITE);
+
+// Create a table
+String sql = "CREATE TABLE table_name (column1 TEXT, column2 TEXT, column3 TEXT);";
+db.execSQL(sql);
+
+// Insert data into the table
+db.execSQL("INSERT INTO table_name (column1, column2, column3) VALUES ('value1', 'value2', 'value3');");
+
+// Close the database connection
+db.close();
+
+Here is an example of how to update data in the table:
+
+// Create the database
+SQLiteDatabase db = SQLiteDatabase.openDatabase("database_name.db", null, SQLiteDatabase.OPEN_READWRITE);
+
+// Update data in the table
+db.execSQL("UPDATE table_name SET column1 = 'new_value1', column2 = 'new_value2' WHERE column3 = 'value3';");
+
+// Close the database connection
+db.close();
+
+Here is an example of how to delete data from the table:
+
+// Create the database
+SQLiteDatabase db = SQLiteDatabase.openDatabase("database_name.db", null, SQLiteDatabase.OPEN_READWRITE);
+
+// Delete data from the table
+db.execSQL("DELETE FROM table_name WHERE column3 = 'value3';");
+
+// Close the database connection
+db.close();
+
+I hope this helps! Let me know if you have any other questions.
